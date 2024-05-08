@@ -12,8 +12,12 @@ typedef struct imagem
 } Imagem;
 
 
-
-int main(){
-
-    return 0;
+//Retornar o pixel, dado as suas posicoes de linha e coluna
+Pixel getPixel(int lin, int col, Imagem *img){
+   
+    return img->pixels[lin * (img->largura) + col];
 }
+
+
+
+
