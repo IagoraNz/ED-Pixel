@@ -16,7 +16,7 @@ void printImagem(Imagem *img){
 
     for(int i=0;i<img->altura;i++){
         for(int j=0;j<img->largura;j++){
-            printf("%d,%d,%d", img->pixels[i * (img->largura) + j].red, img->pixels[i * (img->largura) + j].green,img->pixels[i * (img->largura) + j].blue);
+            printPixel(i,j,img);
         }
         printf("\n");
     }
