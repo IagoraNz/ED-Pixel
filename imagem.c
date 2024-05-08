@@ -11,6 +11,8 @@ typedef struct imagem
     Pixel *pixels;
 } Imagem;
 
+
+
 int main(){
 
     return 0;
