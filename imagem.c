@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "imagem.h"
 
-typedef struct pixel {
+typedef struct{
     int red, blue, green;
-} Pixel;
+}Pixel;
 
 typedef struct imagem
 {
