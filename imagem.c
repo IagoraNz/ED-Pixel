@@ -12,7 +12,6 @@ typedef struct imagem
 } Imagem;
 
 
-
 int main(){
 
     return 0;
