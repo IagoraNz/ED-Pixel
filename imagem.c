@@ -1,16 +1,33 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 #include "imagem.h"
 
 typedef struct{
     int red, blue, green;
 }Pixel;
 
-
 typedef struct imagem
 {
     int altura, largura;
     Pixel *pixels;
-} Imagem;
+}Imagem;
+
+void printImagem(Imagem *img){
+
+    for(int i=0;i<img->altura;i++){
+        for(int j=0;j<img->largura;j++){
+            printPixel(i,j,img);
+        }
+        printf("\n");
+    }
+}
+
+Pixel getPixel(int lin, int col, Imagem *img){
+   
+    return img->pixels[lin * (img->largura) + col];
+}
+
 
 void setPixel(int lin, int col, Imagem *img){
     int i, j, controle = 0;
@@ -36,6 +53,7 @@ void setPixel(int lin, int col, Imagem *img){
         printf("Pixel nao encontrado");
 }
 
+
 void printDimesoesImagens(Imagem *img){
     printf("Altura: %d\nLargura: %d\n", img->altura, img->largura);
 }
@@ -43,3 +61,4 @@ void printDimesoesImagens(Imagem *img){
 void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
+
