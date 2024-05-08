@@ -20,5 +20,13 @@ void printImagem(Imagem *img){
         }
         printf("\n");
     }
-
 }
+
+Pixel getPixel(int lin, int col, Imagem *img){
+   
+    return img->pixels[lin * (img->largura) + col];
+}
+
+
+
+
