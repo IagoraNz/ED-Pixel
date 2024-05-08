@@ -23,10 +23,5 @@ void printImagem(Imagem *img){
 }
 
 Pixel getPixel(int lin, int col, Imagem *img){
-   
     return img->pixels[lin * (img->largura) + col];
 }
-
-
-
-
