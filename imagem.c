@@ -78,6 +78,7 @@ int main(){
     
     Imagem *image;
     converteImagem(image, arq);
+    
 
     return 0;
 }
