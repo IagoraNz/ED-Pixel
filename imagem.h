@@ -1,30 +1,29 @@
-#ifdef IMAGEM_H
+#ifndef IMAGEM_H
 #define IMAGEM_H
 
 // typedef struct pixel PixelRGB;
 // typedef struct imagem Imagem;
 
-// typedef struct pixelgray Pixelgray;
+// typedef struct pixelgray PixelGray;
 // typedef struct image ImageGray;
 
 typedef struct pixel{
     int red, blue, green;
-}Pixel;
+}PixelRGB;
 
 typedef struct imagem{
     int altura, largura;
     PixelRGB *pixels;
-}Image;
+}Imagem;
 
 typedef struct pixelgray{
     int gray;
-}Pixelgray;
-
+}PixelGray;
 typedef struct image{
     int altura;
     int largura;
-    Pixelgray *pixels;
-}Imagegray;
+    PixelGray *pixels;
+}ImageGray;
 
 /*
 Novas funcoes

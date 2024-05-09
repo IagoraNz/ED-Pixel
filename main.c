@@ -5,8 +5,8 @@ int main(){
     FILE *arq;
     arq = fopen("../input_image.txt", "r");
     
-    Image *image;
-    
+    Imagem *image;
+
     converteImagem(&image, arq);
 
     return 0;
