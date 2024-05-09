@@ -4,25 +4,6 @@
 #include <string.h>
 #include "imagem.h"
 
-struct pixel{
-    int red, blue, green;
-};
-
-struct imagem{
-    int altura, largura;
-    PixelRGB *pixels;
-};
-
-struct pixelgray{
-    int gray;
-};
-
-struct image{
-    int altura;
-    int largura;
-    Pixelgray *pixels;
-};
-
 void printImagem(Imagem *img){
 
     for(int i=0;i<img->altura;i++){
@@ -76,14 +57,28 @@ void alocarPixels(int altura, int largura, PixelRGB **pixel){
 void converteImagem(Imagem *image,FILE *arq){
     int i=0;
 
-    fscanf(arq,"%d", image->altura);
-    fscanf(arq,"%d", image->largura);
+    fscanf(arq,"%d", &(image->altura));
+    fscanf(arq,"%d", &(image->largura));
     
-    alocarPixels(image->altura,image->largura, image->pixels);
+    printf("%d", image->altura);
+    printf("%d", image->largura);
+
+    alocarPixels(image->altura,image->largura, &(image->pixels));
 
     while(!(feof(arq))){
-        fscanf(arq,"%d %d %d,", image->pixels[i].red, image->pixels[i].green,image->pixels[i].blue);
+        fscanf(arq,"%d %d %d,", &(image->pixels[i].red), &(image->pixels[i].green),&(image->pixels[i].blue));
         printf("%d %d %d,", image->pixels[i].red, image->pixels[i].green,image->pixels[i].blue);
         i++;
     }
 }  
+
+int main(){
+    FILE *arq;
+    arq = fopen("../input_image.txt", "r");
+    
+    Imagem *image;
+    converteImagem(image, arq);
+    
+
+    return 0;
+}
