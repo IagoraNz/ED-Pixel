@@ -57,13 +57,13 @@ void alocarPixels(int altura, int largura, PixelRGB **pixel){
 void converteImagem(Imagem *image,FILE *arq){
     int i=0;
 
-    fscanf(arq,"%d", &(image->altura));
-    fscanf(arq,"%d", &(image->largura));
-
-    alocarPixels(image->altura,image->largura, &(image->pixels));
+    fscanf(arq,"%d", image->altura);
+    fscanf(arq,"%d", image->largura);
+    
+    alocarPixels(image->altura,image->largura, image->pixels);
 
     while(!(feof(arq))){
-        fscanf(arq,"%d %d %d,", &(image->pixels[i].red), &(image->pixels[i].green),&(image->pixels[i].blue));
+        fscanf(arq,"%d %d %d,", image->pixels[i].red, image->pixels[i].green,image->pixels[i].blue);
         printf("%d %d %d,", image->pixels[i].red, image->pixels[i].green,image->pixels[i].blue);
         i++;
     }
