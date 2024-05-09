@@ -3,26 +3,25 @@
 #include <stdlib.h>
 #include "imagem.h"
 
-typedef struct{
+struct pixel{
     int red, blue, green;
-}Pixel;
+};
 
-typedef struct imagem
+struct imagem
 {
     int altura, largura;
-    Pixel *pixels;
-}Imagem;
+    PixelRGB *pixels;
+};
 
-
-typedef struct pixelgray{
+struct pixelgray{
     int gray;
-}Pixelgray;
+};
 
-typedef struct image {
+struct image {
     int altura;
     int largura;
     Pixelgray *pixels;
-} ImageGray;
+};
 
 void printImagem(Imagem *img){
 
@@ -34,13 +33,7 @@ void printImagem(Imagem *img){
     }
 }
 
-//Retornar o pixel, dado as suas posicoes de linha e coluna
-Pixel getPixel(int lin, int col, Imagem *img){
-   
-    return img->pixels[lin * (img->largura) + col];
-}
-
-Pixel getPixel(int lin, int col, Imagem *img){
+PixelRGB getPixel(int lin, int col, Imagem *img){
     return img->pixels[lin * (img->largura) + col];
 }
 
@@ -68,7 +61,6 @@ void setPixel(int lin, int col, Imagem *img){
         printf("Pixel nao encontrado");
 }
 
-
 void printDimesoesImagens(Imagem *img){
     printf("Altura: %d\nLargura: %d\n", img->altura, img->largura);
 }
@@ -76,8 +68,11 @@ void printDimesoesImagens(Imagem *img){
 void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
+<<<<<<< HEAD
 
 ImageGray tranformaRGB_GRAY(Imagem *img){
 
     
 }
+=======
+>>>>>>> bd67a8d9f8d7c3bf20259a69580df19832cdf6e5

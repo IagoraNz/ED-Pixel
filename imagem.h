@@ -28,4 +28,8 @@ void setPixel(int lin, int col, Imagem *img);
 //Mostrar os pixels da imagem, em forma de matriz
 void printImagem(Imagem *img);
 
+<<<<<<< HEAD
 ImageGray tranformaRGB_GRAY(Imagem *img);
+=======
+void ImagemGray(ImageGray imagem);
+>>>>>>> bd67a8d9f8d7c3bf20259a69580df19832cdf6e5
