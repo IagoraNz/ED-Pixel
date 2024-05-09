@@ -69,6 +69,25 @@ void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
 
+// - exportar imagem para txt -> txt salvo
+
+void ImagemGray(ImageGray *img){
+    FILE *imagem;
+    imagem = fopen("imagemgray.txt", "w");
+    if (imagem == NULL){
+        print("Nao foi possivel criar o arquivo!\n");
+    }
+    fprintf(imagem, "%d", img->altura);
+    fprintf(imagem, "%d", img->largura);
+
+    int quant_pixels = img->altura * img->largura;
+
+    for(int x = 0; x < quant_pixels; x++){
+        fprintf(imagem,"%d, ", img->pixels[x]);
+    }
+    fclose(imagem);
+}
+
 void alocarPixels(int altura, int largura, PixelRGB **pixel){
     *pixel = (PixelRGB*)calloc(sizeof(PixelRGB), altura*largura);
 }

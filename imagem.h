@@ -26,6 +26,6 @@ void setPixel(int lin, int col, Imagem *img);
 //Mostrar os pixels da imagem, em forma de matriz
 void printImagem(Imagem *img);
 
-void ImagemGray(ImageGray imagem);
+void ImagemGray(ImageGray *img);
 
 void alocarPixels(int altura, int largura, PixelRGB **pixel);
