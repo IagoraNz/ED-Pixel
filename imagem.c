@@ -8,9 +8,20 @@ struct pixel{
     int red, blue, green;
 };
 
-struct imagem{
+struct imagem
+{
     int altura, largura;
     PixelRGB *pixels;
+};
+
+struct pixelgray{
+    int gray;
+};
+
+struct image {
+    int altura;
+    int largura;
+    Pixelgray *pixels;
 };
 
 void printImagem(Imagem *img){
@@ -23,7 +34,7 @@ void printImagem(Imagem *img){
     }
 }
 
-Pixel getPixel(int lin, int col, Imagem *img){
+PixelRGB getPixel(int lin, int col, Imagem *img){
     return img->pixels[lin * (img->largura) + col];
 }
 
@@ -51,7 +62,6 @@ void setPixel(int lin, int col, Imagem *img){
         printf("Pixel nao encontrado");
 }
 
-
 void printDimesoesImagens(Imagem *img){
     printf("Altura: %d\nLargura: %d\n", img->altura, img->largura);
 }
@@ -59,6 +69,7 @@ void printDimesoesImagens(Imagem *img){
 void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
+<<<<<<< HEAD
 
 void converteImagem(Imagem *image,FILE *arq){
     int i=0;
@@ -73,3 +84,5 @@ void converteImagem(Imagem *image,FILE *arq){
     }
 
 }  
+=======
+>>>>>>> bd67a8d9f8d7c3bf20259a69580df19832cdf6e5
