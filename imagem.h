@@ -13,6 +13,7 @@ Novas funcoes
 	adtaptar a funcao da distancia euclidiana para considerar apenas os valores do pixel -> salvar txt com o resultado da clusterizacao
 */
 
+void converteImagem(FILE *arq);
 
 void printDimesoesImagens(Imagem *img); // Francinaldo
 void printPixel(int lin, int col, Imagem *img); // Francinaldo

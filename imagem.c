@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 #include "imagem.h"
 
-typedef struct{
+struct pixel{
     int red, blue, green;
-}Pixel;
+};
 
-typedef struct imagem
-{
+struct imagem{
     int altura, largura;
-    Pixel *pixels;
-}Imagem;
+    PixelRGB *pixels;
+};
 
 void printImagem(Imagem *img){
 
@@ -60,3 +60,16 @@ void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
 
+void converteImagem(Imagem *image,FILE *arq){
+    int i=0;
+
+    fscanf(arq,"%d", image->altura);
+    fscanf(arq,"%d", image->largura);
+
+    while(!(feof(arq))){
+        fscanf(arq,"%d %d %d,", image->pixels[i]->red, image->pixels[i]->green,image->pixels[i]->blue);
+        printf("%d %d %d,", image->pixels[i]->red, image->pixels[i]->green,image->pixels[i]->blue);
+        i++;
+    }
+
+}  
