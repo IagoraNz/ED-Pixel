@@ -28,6 +28,7 @@ Pixel getPixel(int lin, int col, Imagem *img){
    
     return img->pixels[lin * (img->largura) + col];
 }
+
 Pixel getPixel(int lin, int col, Imagem *img){
     return img->pixels[lin * (img->largura) + col];
 }
@@ -64,4 +65,3 @@ void printDimesoesImagens(Imagem *img){
 void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
-
