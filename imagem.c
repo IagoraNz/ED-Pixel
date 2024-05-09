@@ -6,9 +6,24 @@
 
 void printImagem(Imagem *img){
 
-    for(int i=0;i<img->altura;i++){
-        for(int j=0;j<img->largura;j++){
+    for(int i=0;i < img->altura; i++){
+        for(int j=0;j < img->largura; j++){
             printPixel(i,j,img);
+        }
+        printf("\n");
+    }
+}
+
+void printPixelGray(int lin, int col, ImageGray *img){
+    int grey = img->pixels[lin* img->largura + col].gray;
+    printf("\033[38;2;%d;%d;%dm*\033[0m", grey, grey, grey);
+}
+
+void printImagemGrey(ImageGray *imggray){
+
+    for(int i=0;i < imggray->altura; i++){
+        for(int j=0;j < imggray->largura; j++){
+            printPixelGray(i,j,imggray);
         }
         printf("\n");
     }
@@ -50,41 +65,45 @@ void printPixel(int lin, int col, Imagem *img){
     printf("\033[38;2;%d;%d;%dm*\033[0m", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
 
+void alocarPixelsGray(int altura, int largura, PixelGray **pixel){
+    *pixel = (PixelGray*)calloc(sizeof(PixelGray), altura*largura);
+}
+
 //- Converter imagem RGB para nivel de cinza, isto é, com um único valor de pixel ->
 // - ImageGray = (Pixelrgb.red +pixelrgb.blue+.pixelrgb gree)/3
-void tranformaRGB_GRAY(Imagem *img, ImageGray **imagemgray){
-    *imagemgray= (ImageGray*)malloc(sizeof(ImageGray));
-    (*imagemgray)->altura = img->altura;
-    (*imagemgray)->largura= img->largura;
-    (*imagemgray)->pixels=(Pixelgray*)malloc(img->altura * img->largura *sizeof(Pixelgray));
+void tranformaRGB_GRAY(Imagem *img, ImageGray *imagemgray){
+    imagemgray->altura = img->altura;
+    imagemgray->largura = img->largura;
+    
+    alocarPixelsGray(imagemgray->altura, imagemgray->largura,&(imagemgray->pixels));
+    
+    for ( int i = 0; i < img->altura; i++){
+        for (int j = 0; j < img->largura; j++) {
 
-    for ( int i = 0; i <=img->altura; i++){
-        for (int j = 0; j <=img->largura; j++) {
-            PixelRGB pixel = img->pixels[i * img->largura +j];
-            int gray = (pixel.red + pixel.green + pixel.blue) / 3;
-            (*imagemgray)->pixels[i + img->largura +j].gray = gray;
+            int gray = (img->pixels[i * img->largura +j].red + img->pixels[i * img->largura +j].green + img->pixels[i * img->largura +j].blue) / 3;
 
+            imagemgray->pixels[i * img->largura +j].gray = gray;
         }
      }
-    printPixel((*imagemgray)->altura,(*imagemgray)->largura,img);
 }
 
-void ImagemGray(ImageGray *img){
-    FILE *imagem;
-    imagem = fopen("imagemgray.txt", "w");
-    if (imagem == NULL){
-        printf("Nao foi possivel criar o arquivo!\n");
-    }
-    fprintf(imagem, "%d", img->altura);
-    fprintf(imagem, "%d", img->largura);
+// void ImagemGray(ImageGray *img){
+//     FILE *imagem;
+//     imagem = fopen("imagemgray.txt", "w");
+//     if (imagem == NULL){
+//         printf("Nao foi possivel criar o arquivo!\n");
+//     }
 
-    int quant_pixels = img->altura * img->largura;
+//     fprintf(imagem, "%d", img->altura);
+//     fprintf(imagem, "%d", img->largura);
 
-    for(int x = 0; x < quant_pixels; x++){
-        fprintf(imagem,"%d, ", img->pixels[x].gray);
-    }
-    fclose(imagem);
-}
+//     int quant_pixels = img->altura * img->largura;
+
+//     for(int x = 0; x < quant_pixels; x++){
+//         fprintf(imagem,"%d, ", img->pixels[x].red);
+//     }
+//     fclose(imagem);
+// }
 
 void alocarPixels(int altura, int largura, PixelRGB **pixel){
     *pixel = (PixelRGB*)calloc(sizeof(PixelRGB), altura*largura);
@@ -107,10 +126,20 @@ void converteImagem(Imagem *image,FILE *arq){
 int main(){
     FILE *arq;
     arq = fopen("../input_image.txt","r");
-    Imagem *image;
+    int a;
 
-    converteImagem(image,arq);
-    printImagem(image);
+    Imagem image;
+    ImageGray imagegray;
+
+    scanf("%d", &a);
+    printf("\n");
+
+    converteImagem(&image,arq);
+
+    tranformaRGB_GRAY(&image, &imagegray);
+    printImagemGrey(&imagegray);
+
+    printImagem(&image);
 
     return 0;
 }

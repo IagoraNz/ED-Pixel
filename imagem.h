@@ -19,6 +19,7 @@ typedef struct imagem{
 typedef struct pixelgray{
     int gray;
 }PixelGray;
+
 typedef struct image{
     int altura;
     int largura;
@@ -64,7 +65,7 @@ void setPixel(int lin, int col, Imagem *img);
 //Mostrar os pixels da imagem, em forma de matriz
 void printImagem(Imagem *img);
 
-void tranformaRGB_GRAY(Imagem *img, ImageGray **imagemgray);
+void tranformaRGB_GRAY(Imagem *img, ImageGray *imagemgray);
 
 
 void ImagemGray(ImageGray *img);
