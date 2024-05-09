@@ -69,7 +69,6 @@ void printDimesoesImagens(Imagem *img){
 void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
-<<<<<<< HEAD
 
 void converteImagem(Imagem *image,FILE *arq){
     int i=0;
@@ -82,7 +81,4 @@ void converteImagem(Imagem *image,FILE *arq){
         printf("%d %d %d,", image->pixels[i]->red, image->pixels[i]->green,image->pixels[i]->blue);
         i++;
     }
-
 }  
-=======
->>>>>>> bd67a8d9f8d7c3bf20259a69580df19832cdf6e5
