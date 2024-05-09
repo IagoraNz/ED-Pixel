@@ -13,6 +13,17 @@ typedef struct imagem
     Pixel *pixels;
 }Imagem;
 
+
+typedef struct pixelgray{
+    int gray;
+}Pixelgray;
+
+typedef struct image {
+    int altura;
+    int largura;
+    Pixelgray *pixels;
+} ImageGray;
+
 void printImagem(Imagem *img){
 
     for(int i=0;i<img->altura;i++){
