@@ -76,3 +76,8 @@ void printDimesoesImagens(Imagem *img){
 void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
+
+ImageGray tranformaRGB_GRAY(Imagem *img){
+
+    
+}
