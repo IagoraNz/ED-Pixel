@@ -1,27 +1,30 @@
-typedef struct pixel PixelRGB;
-typedef struct imagem Imagem;
+#ifdef IMAGEM_H
+#define IMAGEM_H
 
-typedef struct pixelgray Pixelgray;
-typedef struct image ImageGray;
+// typedef struct pixel PixelRGB;
+// typedef struct imagem Imagem;
 
-struct pixel{
+// typedef struct pixelgray Pixelgray;
+// typedef struct image ImageGray;
+
+typedef struct pixel{
     int red, blue, green;
-};
+}Pixel;
 
-struct imagem{
+typedef struct imagem{
     int altura, largura;
     PixelRGB *pixels;
-};
+}Image;
 
-struct pixelgray{
+typedef struct pixelgray{
     int gray;
-};
+}Pixelgray;
 
-struct image{
+typedef struct image{
     int altura;
     int largura;
     Pixelgray *pixels;
-};
+}Imagegray;
 
 /*
 Novas funcoes
@@ -48,3 +51,4 @@ void printImagem(Imagem *img);
 void ImagemGray(ImageGray imagem);
 
 void alocarPixels(int altura, int largura, PixelRGB **pixel);
+#endif
