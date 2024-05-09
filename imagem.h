@@ -64,13 +64,10 @@ void setPixel(int lin, int col, Imagem *img);
 //Mostrar os pixels da imagem, em forma de matriz
 void printImagem(Imagem *img);
 
-<<<<<<< HEAD
 void tranformaRGB_GRAY(Imagem *img, ImageGray **imagemgray);
 
-void ImagemGray(ImageGray imagem);
-=======
+
 void ImagemGray(ImageGray *img);
->>>>>>> bee33b96d41e9dc63cd8a8f03bbe783c000050a2
 
 void alocarPixels(int altura, int largura, PixelRGB **pixel);
 #endif
