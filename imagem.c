@@ -82,10 +82,12 @@ void tranformaRGB_GRAY(Imagem *img, ImageGray **imagemgray){
             PixelRGB pixel = img->pixels[i * img->largura +j];
             int gray = (pixel.red + pixel.green + pixel.blue) / 3;
             (*imagemgray)->pixels[i + img->largura +j].gray = gray;
+
         }
      }
-    printPixel((*imagemgray)->altura,(*imagemgray)->largura, *img);
+    printPixel((*imagemgray)->altura,(*imagemgray)->largura,img);
 }
+
 void alocarPixels(int altura, int largura, PixelRGB **pixel){
     *pixel = (PixelRGB*)calloc(sizeof(PixelRGB), altura*largura);
 }
