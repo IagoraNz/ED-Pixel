@@ -68,11 +68,21 @@ void printDimesoesImagens(Imagem *img){
 void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
-<<<<<<< HEAD
 
-ImageGray tranformaRGB_GRAY(Imagem *img){
+//- Converter imagem RGB para nivel de cinza, isto é, com um único valor de pixel ->
+// - ImageGray = (Pixelrgb.red +pixelrgb.blue+.pixelrgb gree)/3
+void tranformaRGB_GRAY(Imagem *img, ImageGray **imagemgray){
+    *imagemgray= (ImageGray*)malloc(sizeof(ImageGray));
+    (*imagemgray)->altura = img->altura;
+    (*imagemgray)->largura= img->largura;
+    (*imagemgray)->pixels=(Pixelgray*)malloc(img->altura * img->largura *sizeof(Pixelgray));
 
-    
+    for ( int i = 0; i <=img->altura; i++){
+        for (int j = 0; j <=img->largura; j++) {
+            PixelRGB pixel = img->pixels[i * img->largura +j];
+            int gray = (pixel.red + pixel.green + pixel.blue) / 3;
+            (*imagemgray)->pixels[i + img->largura +j].gray = gray;
+        }
+     }
+    printPixel((*imagemgray)->altura,(*imagemgray)->largura, *img);
 }
-=======
->>>>>>> bd67a8d9f8d7c3bf20259a69580df19832cdf6e5
