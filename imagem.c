@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 #include "imagem.h"
 
 struct pixel{
     int red, blue, green;
 };
 
-struct imagem
-{
+struct imagem{
     int altura, largura;
     PixelRGB *pixels;
 };
@@ -17,7 +17,7 @@ struct pixelgray{
     int gray;
 };
 
-struct image {
+struct image{
     int altura;
     int largura;
     Pixelgray *pixels;
@@ -69,6 +69,7 @@ void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
 
+<<<<<<< HEAD
 //- Converter imagem RGB para nivel de cinza, isto é, com um único valor de pixel ->
 // - ImageGray = (Pixelrgb.red +pixelrgb.blue+.pixelrgb gree)/3
 void tranformaRGB_GRAY(Imagem *img, ImageGray **imagemgray){
@@ -86,3 +87,23 @@ void tranformaRGB_GRAY(Imagem *img, ImageGray **imagemgray){
      }
     printPixel((*imagemgray)->altura,(*imagemgray)->largura, *img);
 }
+=======
+void alocarPixels(int altura, int largura, PixelRGB **pixel){
+    *pixel = (PixelRGB*)calloc(sizeof(PixelRGB), altura*largura);
+}
+
+void converteImagem(Imagem *image,FILE *arq){
+    int i=0;
+
+    fscanf(arq,"%d", image->altura);
+    fscanf(arq,"%d", image->largura);
+    
+    alocarPixels(image->altura,image->largura, image->pixels);
+
+    while(!(feof(arq))){
+        fscanf(arq,"%d %d %d,", image->pixels[i].red, image->pixels[i].green,image->pixels[i].blue);
+        printf("%d %d %d,", image->pixels[i].red, image->pixels[i].green,image->pixels[i].blue);
+        i++;
+    }
+}  
+>>>>>>> 9595bf94f54d8551c8ca2dfad9cd4a1b78a16545

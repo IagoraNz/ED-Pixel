@@ -14,6 +14,7 @@ Novas funcoes
 	adtaptar a funcao da distancia euclidiana para considerar apenas os valores do pixel -> salvar txt com o resultado da clusterizacao
 */
 
+void converteImagem(Imagem *image,FILE *arq);
 
 
 void printDimesoesImagens(Imagem *img); // Francinaldo
@@ -31,3 +32,5 @@ void printImagem(Imagem *img);
 void tranformaRGB_GRAY(Imagem *img, ImageGray **imagemgray);
 
 void ImagemGray(ImageGray imagem);
+
+void alocarPixels(int altura, int largura, PixelRGB **pixel);
