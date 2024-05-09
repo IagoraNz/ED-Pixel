@@ -1,13 +1,13 @@
 #include <stdio.h>
 
-<<<<<<< Updated upstream
-=======
 #include "imagem.h"
-/*
-att
-*/
->>>>>>> Stashed changes
+
 int main(){
+    FILE *arq;
+    arq = fopen("../input_image.txt", "r");
+    
+    Imagem *image;
+    converteImagem(image, arq);
 
     return 0;
 }
