@@ -1,17 +1,27 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 #include "imagem.h"
 
-typedef struct{
+struct pixel{
     int red, blue, green;
-}Pixel;
+};
 
-typedef struct imagem
-{
+struct imagem{
     int altura, largura;
-    Pixel *pixels;
-}Imagem;
+    PixelRGB *pixels;
+};
+
+struct pixelgray{
+    int gray;
+};
+
+struct image{
+    int altura;
+    int largura;
+    Pixelgray *pixels;
+};
 
 void printImagem(Imagem *img){
 
@@ -23,7 +33,7 @@ void printImagem(Imagem *img){
     }
 }
 
-Pixel getPixel(int lin, int col, Imagem *img){
+PixelRGB getPixel(int lin, int col, Imagem *img){
     return img->pixels[lin * (img->largura) + col];
 }
 
@@ -51,7 +61,6 @@ void setPixel(int lin, int col, Imagem *img){
         printf("Pixel nao encontrado");
 }
 
-
 void printDimesoesImagens(Imagem *img){
     printf("Altura: %d\nLargura: %d\n", img->altura, img->largura);
 }
@@ -60,3 +69,21 @@ void printPixel(int lin, int col, Imagem *img){
     printf("%d, %d, %d", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
 
+void alocarPixels(int altura, int largura, PixelRGB **pixel){
+    *pixel = (PixelRGB*)calloc(sizeof(PixelRGB), altura*largura);
+}
+
+void converteImagem(Imagem *image,FILE *arq){
+    int i=0;
+
+    fscanf(arq,"%d", image->altura);
+    fscanf(arq,"%d", image->largura);
+    
+    alocarPixels(image->altura,image->largura, image->pixels);
+
+    while(!(feof(arq))){
+        fscanf(arq,"%d %d %d,", image->pixels[i].red, image->pixels[i].green,image->pixels[i].blue);
+        printf("%d %d %d,", image->pixels[i].red, image->pixels[i].green,image->pixels[i].blue);
+        i++;
+    }
+}  
