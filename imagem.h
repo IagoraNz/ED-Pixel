@@ -64,7 +64,4 @@ void printImagem(Imagem *img);
 void ImagemGray(ImageGray *img);
 
 void alocarPixels(int altura, int largura, PixelRGB **pixel);
-<<<<<<< HEAD
 #endif
-=======
->>>>>>> ae0ea96dc8afacba02022b88f3c17b483f6426df
