@@ -14,21 +14,6 @@ void printImagem(Imagem *img){
     }
 }
 
-void printPixelGray(int lin, int col, ImageGray *img){
-    int grey = img->pixels[lin* img->largura + col].gray;
-    printf("\033[38;2;%d;%d;%dm*\033[0m", grey, grey, grey);
-}
-
-void printImagemGrey(ImageGray *imggray){
-
-    for(int i=0;i < imggray->altura; i++){
-        for(int j=0;j < imggray->largura; j++){
-            printPixelGray(i,j,imggray);
-        }
-        printf("\n");
-    }
-}
-
 PixelRGB getPixel(int lin, int col, Imagem *img){
     return img->pixels[lin * (img->largura) + col];
 }
@@ -62,7 +47,7 @@ void printDimesoesImagens(Imagem *img){
 }
 
 void printPixel(int lin, int col, Imagem *img){
-    printf("\033[38;2;%d;%d;%dm*\033[0m", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
+    printf("\033[38;2;%d;%d;%dm**\033[0m", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
 }
 
 void alocarPixelsGray(int altura, int largura, PixelGray **pixel){
@@ -87,23 +72,24 @@ void tranformaRGB_GRAY(Imagem *img, ImageGray *imagemgray){
      }
 }
 
-// void ImagemGray(ImageGray *img){
-//     FILE *imagem;
-//     imagem = fopen("imagemgray.txt", "w");
-//     if (imagem == NULL){
-//         printf("Nao foi possivel criar o arquivo!\n");
-//     }
+void ImagemGray(ImageGray *img,FILE *imagem){
+    if (imagem == NULL){
+        printf("Nao foi possivel criar o arquivo!\n");
+    }
 
-//     fprintf(imagem, "%d", img->altura);
-//     fprintf(imagem, "%d", img->largura);
+    fprintf(imagem, "%d\n", img->altura);
+    fprintf(imagem, "%d\n", img->largura);
 
-//     int quant_pixels = img->altura * img->largura;
-
-//     for(int x = 0; x < quant_pixels; x++){
-//         fprintf(imagem,"%d, ", img->pixels[x].red);
-//     }
-//     fclose(imagem);
-// }
+    for(int i=0;i<img->altura;i++){
+        for(int x = 0; x < img->largura; x++){
+            fprintf(imagem,"%d %d %d,", img->pixels[(i * img->largura) + x].gray, img->pixels[(i * img->largura) + x].gray, img->pixels[(i * img->largura) + x].gray);
+        }
+        fprintf(imagem,"\n");
+    }
+    
+    
+    fclose(imagem);
+}
 
 void alocarPixels(int altura, int largura, PixelRGB **pixel){
     *pixel = (PixelRGB*)calloc(sizeof(PixelRGB), altura*largura);
@@ -126,20 +112,27 @@ void converteImagem(Imagem *image,FILE *arq){
 int main(){
     FILE *arq;
     arq = fopen("../input_image.txt","r");
-    int a;
+    
+    FILE *imagem;
+    imagem = fopen("./imagemgray.txt", "w+");
 
     Imagem image;
     ImageGray imagegray;
 
-    scanf("%d", &a);
-    printf("\n");
+    system("PAUSE");
 
     converteImagem(&image,arq);
+    printImagem(&image);
 
     tranformaRGB_GRAY(&image, &imagegray);
-    printImagemGrey(&imagegray);
+
+    ImagemGray(&imagegray,imagem);
+    converteImagem(&image,imagem);
 
     printImagem(&image);
+
+    free(image.pixels);
+    free(imagegray.pixels);
 
     return 0;
 }

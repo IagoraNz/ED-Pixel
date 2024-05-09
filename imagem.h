@@ -68,7 +68,7 @@ void printImagem(Imagem *img);
 void tranformaRGB_GRAY(Imagem *img, ImageGray *imagemgray);
 
 
-void ImagemGray(ImageGray *img);
+void ImagemGray(ImageGray *img,FILE *imagem);
 
 void alocarPixels(int altura, int largura, PixelRGB **pixel);
 #endif
