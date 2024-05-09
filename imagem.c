@@ -113,8 +113,7 @@ int main(){
     FILE *arq;
     arq = fopen("../input_image.txt","r");
     
-    FILE *imagem;
-    imagem = fopen("./imagemgray.txt", "w+");
+
 
     Imagem image;
     ImageGray imagegray;
@@ -126,7 +125,11 @@ int main(){
 
     tranformaRGB_GRAY(&image, &imagegray);
 
+    FILE *imagem;
+    imagem = fopen("./imagemgray.txt", "r");
     ImagemGray(&imagegray,imagem);
+
+    imagem = fopen("./imagemgray.txt", "r");
     converteImagem(&image,imagem);
 
     printImagem(&image);
