@@ -4,6 +4,25 @@ typedef struct imagem Imagem;
 typedef struct pixelgray Pixelgray;
 typedef struct image ImageGray;
 
+struct pixel{
+    int red, blue, green;
+};
+
+struct imagem{
+    int altura, largura;
+    PixelRGB *pixels;
+};
+
+struct pixelgray{
+    int gray;
+};
+
+struct image{
+    int altura;
+    int largura;
+    Pixelgray *pixels;
+};
+
 /*
 Novas funcoes
 - ler txt e converter em imagem -> Image
