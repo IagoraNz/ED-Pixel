@@ -56,7 +56,7 @@ void ImagemGray(ImageGray *img){
     FILE *imagem;
     imagem = fopen("imagemgray.txt", "w");
     if (imagem == NULL){
-        print("Nao foi possivel criar o arquivo!\n");
+        printf("Nao foi possivel criar o arquivo!\n");
     }
     fprintf(imagem, "%d", img->altura);
     fprintf(imagem, "%d", img->largura);
@@ -64,7 +64,7 @@ void ImagemGray(ImageGray *img){
     int quant_pixels = img->altura * img->largura;
 
     for(int x = 0; x < quant_pixels; x++){
-        fprintf(imagem,"%d, ", img->pixels[x]);
+        fprintf(imagem,"%d, ", img->pixels[x].gray);
     }
     fclose(imagem);
 }
