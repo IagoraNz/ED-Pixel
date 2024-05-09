@@ -24,10 +24,8 @@ void printImagem(Imagem *img){
 }
 
 Pixel getPixel(int lin, int col, Imagem *img){
-   
     return img->pixels[lin * (img->largura) + col];
 }
-
 
 void setPixel(int lin, int col, Imagem *img){
     int i, j, controle = 0;
