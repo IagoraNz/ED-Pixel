@@ -126,7 +126,7 @@ int main(){
     tranformaRGB_GRAY(&image, &imagegray);
 
     FILE *imagem;
-    imagem = fopen("./imagemgray.txt", "r");
+    imagem = fopen("./imagemgray.txt", "w");
     ImagemGray(&imagegray,imagem);
 
     imagem = fopen("./imagemgray.txt", "r");
