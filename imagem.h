@@ -1,6 +1,8 @@
 typedef struct pixel PixelRGB;
-
 typedef struct imagem Imagem;
+
+typedef struct pixelgray Pixelgray;
+typedef struct image ImageGray;
 
 void printDimesoesImagens(Imagem *img); // Francinaldo
 void printPixel(int lin, int col, Imagem *img); // Francinaldo
