@@ -5,7 +5,6 @@
 #include "imagem.h"
 
 void printImagem(Imagem *img){
-
     for(int i=0;i < img->altura; i++){
         for(int j=0;j < img->largura; j++){
             printPixel(i,j,img);
@@ -47,7 +46,7 @@ void printDimesoesImagens(Imagem *img){
 }
 
 void printPixel(int lin, int col, Imagem *img){
-    printf("\033[38;2;%d;%d;%dm**\033[0m", img->pixels[lin*img->largura+col].red, img->pixels[lin*img->largura+col].green, img->pixels[lin*img->largura+col].blue);
+    printf("\033[38;2;%d;%d;%dm**\033[0m", getPixel(lin,col,img).red, getPixel(lin,col,img).green, getPixel(lin,col,img).blue);
 }
 
 void alocarPixelsGray(int altura, int largura, PixelGray **pixel){
@@ -65,7 +64,7 @@ void tranformaRGB_GRAY(Imagem *img, ImageGray *imagemgray){
     for ( int i = 0; i < img->altura; i++){
         for (int j = 0; j < img->largura; j++) {
 
-            int gray = (img->pixels[i * img->largura +j].red + img->pixels[i * img->largura +j].green + img->pixels[i * img->largura +j].blue) / 3;
+            int gray = (getPixel(i,j,img).red + getPixel(i,j,img).green + getPixel(i,j,img).blue) / 3;
 
             imagemgray->pixels[i * img->largura +j].gray = gray;
         }
@@ -112,8 +111,6 @@ void converteImagem(Imagem *image,FILE *arq){
 int main(){
     FILE *arq;
     arq = fopen("../input_image.txt","r");
-    
-
 
     Imagem image;
     ImageGray imagegray;
