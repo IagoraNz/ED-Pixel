@@ -106,7 +106,54 @@ void converteImagem(Imagem *image,FILE *arq){
         fscanf(arq,"%d %d %d,", &(image->pixels[i].red), &(image->pixels[i].green),&(image->pixels[i].blue));
         i++;
     }
-}  
+}
+
+// float euclidesgray(Pixelgray p1, Pixelgray p2){
+//     return abs(p1.gray - p2.gray);
+// }
+
+void clusterizacao(Imagem *img){
+    ImageGray imagemCluster;
+    PixelGray valor, cinza;
+
+    FILE *seeds = fopen("seeds.txt", "r");
+    if(seeds == NULL){
+        printf("Failed to open seeds file.\n");
+        return;
+    }
+
+    imagemCluster.altura = img->altura;
+    imagemCluster.largura = img->largura;
+    imagemCluster.pixels = (PixelGray*)calloc(sizeof(PixelGray), imagemCluster.altura * imagemCluster.largura);
+    
+    int i, j, gray;
+
+    while(!feof(seeds)){
+        int x, y, num, res;
+        while(fscanf(seeds, "%d %d %d", &x, &y, &num) == 3){
+            cinza.gray = (img->pixels[x * img->largura + y].red + img->pixels[x * img->largura + y].green + img->pixels[x * img->largura + y].blue) / 3;
+            for(i = 0; i < img->altura; i++){
+                for(j = 0; j < img->largura; j++){
+                    valor.gray = (img->pixels[i * img->largura + j].red + img->pixels[i * img->largura + j].green + img->pixels[i * img->largura + j].blue) / 3;
+                    res = valor.gray - cinza.gray;
+
+                    if(res < 0)
+                        res *= -1;
+                    
+                    if(res <= num){
+                        gray = (img->pixels[i * img->largura + j].red + img->pixels[i * img->largura + j].green + img->pixels[i * img->largura + j].blue) / 3;
+                        imagemCluster.pixels[i * img->largura + j].gray = gray;
+                    }
+                }
+            }
+        }
+    }
+    FILE *imagem;
+    imagem = fopen("./imagemClusterizada.txt", "w");
+    ImagemGray(&imagemCluster,imagem);
+    fclose(imagem);
+    fclose(seeds);
+}
 
 int main(){
     FILE *arq;
@@ -130,6 +177,8 @@ int main(){
     converteImagem(&image,imagem);
 
     printImagem(&image);
+
+    clusterizacao(&image);
 
     free(image.pixels);
     free(imagegray.pixels);
