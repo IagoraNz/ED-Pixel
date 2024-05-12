@@ -109,10 +109,6 @@ void converteImagem(Imagem *image,FILE *arq){
     }
 }
 
-float euclidesgray(Pixelgray p1, Pixelgray p2){
-    return pow(p1.gray - p2.gray,2);
-}
-
 void clusterizacao(ImageGray *img){
     ImageGray imagecluster;
     FILE *arq;
@@ -123,12 +119,14 @@ void clusterizacao(ImageGray *img){
     arq = fopen("../seed.txt","r");
 
     while(fscanf(arq,"%d %d %d %d", &x,&y,&z,&num) != EOF){
-
         for(int i=0;i < img->altura; i++)
             for(int j=0;j < img->largura; j++){
-                int result = euclidesgray(img->pixels[(i * img->largura) + j],img->pixels[(x * img->largura) + y]);
 
-                if(result < z){
+                int result = img->pixels[(i * img->largura) + j].gray - img->pixels[(x * img->largura) + y].gray;
+                if(result < 0)
+                    result *= -1;
+
+                if(result <= z){
                     imagecluster.pixels[(i * img->largura) + j].gray = num;
                 }
 
@@ -149,7 +147,7 @@ void clusterizacao(ImageGray *img){
 void lerImagemGray(FILE *arq){
     char c;
     while(fscanf(arq, "%c", &c) != EOF){
-        printf("%c", c);
+        printf("%c%c", c,c);
     }
 
 }
