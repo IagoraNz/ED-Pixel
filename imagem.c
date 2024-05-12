@@ -135,11 +135,17 @@ void clusterizacao(ImageGray *img){
 
             }
     }
-    
+
+    // for(int i=0;i< imagecluster.altura;i++){
+    //     for(int j=0;j< imagecluster.largura;j++)
+    //         printf("%d%d", imagecluster.pixels[(i * imagecluster.largura)+ j].gray, imagecluster.pixels[(i * imagecluster.largura)+ j].gray);
+    //     printf("\n");
+    // }
+
     arq = fopen("./imagemclusterizada.txt", "w");
-    for(int i=0;i<img->altura;i++){
-            for(int j=0;j<img->largura;j++)
-                fprintf(arq,"%d", imagecluster.pixels[(i * img->largura) + j].gray);
+    for(int i=0;i < img->altura; i++){
+        for(int j=0;j < img->largura;j++)
+            fprintf(arq,"%d%d", imagecluster.pixels[(i * img->largura) + j].gray, imagecluster.pixels[(i * img->largura) + j].gray);
         fprintf(arq,"\n");
     }
 
@@ -150,7 +156,7 @@ void clusterizacao(ImageGray *img){
 void lerImagemGray(FILE *arq){
     char c;
     while(fscanf(arq, "%c", &c) != EOF){
-        printf("%c%c", c,c);
+        printf("%c", c);
     }
 
 }
@@ -178,7 +184,7 @@ int main(){
     converteImagem(&image,imagem);
     printImagem(&image);
 
-    imagem = fopen("./imagemClusterizada.txt", "r");
+    imagem = fopen("./imagemclusterizada.txt", "r");
     if(!imagem){
         printf("Nao abri");
         exit(1);
