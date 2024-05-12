@@ -116,6 +116,9 @@ void clusterizacao(ImageGray *img){
     imagecluster.pixels = (Pixelgray*)calloc(sizeof(Pixelgray), img->altura * img->largura);  
     int x,y,z,num;
 
+    imagecluster.altura = img->altura;
+    imagecluster.largura = img->largura;
+
     arq = fopen("../seed.txt","r");
 
     while(fscanf(arq,"%d %d %d %d", &x,&y,&z,&num) != EOF){
@@ -132,7 +135,7 @@ void clusterizacao(ImageGray *img){
 
             }
     }
-
+    
     arq = fopen("./imagemclusterizada.txt", "w");
     for(int i=0;i<img->altura;i++){
             for(int j=0;j<img->largura;j++)
@@ -162,7 +165,7 @@ int main(){
     system("PAUSE");
 
     converteImagem(&image,arq);
-    // printImagem(&image);
+    printImagem(&image);
 
     tranformaRGB_GRAY(&image, &imagegray);
     clusterizacao(&imagegray);
@@ -173,15 +176,14 @@ int main(){
 
     imagem = fopen("./imagemgray.txt", "r");
     converteImagem(&image,imagem);
-    // printImagem(&image);
+    printImagem(&image);
 
     imagem = fopen("./imagemClusterizada.txt", "r");
-    lerImagemGray(imagem);
-
     if(!imagem){
         printf("Nao abri");
         exit(1);
     }
+    lerImagemGray(imagem);
 
     free(image.pixels);
     free(imagegray.pixels);
