@@ -54,8 +54,6 @@ void alocarPixelsGray(int altura, int largura, PixelGray **pixel){
     *pixel = (PixelGray*)calloc(sizeof(PixelGray), altura*largura);
 }
 
-//- Converter imagem RGB para nivel de cinza, isto é, com um único valor de pixel ->
-// - ImageGray = (Pixelrgb.red +pixelrgb.blue+.pixelrgb gree)/3
 void tranformaRGB_GRAY(Imagem *img, ImageGray *imagemgray){
     imagemgray->altura = img->altura;
     imagemgray->largura = img->largura;
@@ -151,7 +149,6 @@ void lerImagemGray(FILE *arq){
     while(fscanf(arq, "%c", &c) != EOF){
         printf("%c", c);
     }
-
 }
 
 int main(){
@@ -179,7 +176,7 @@ int main(){
 
     imagem = fopen("./imagemclusterizada.txt", "r");
     if(!imagem){
-        printf("Nao abri");
+        printf("Erro ao abrir a imagem");
         exit(1);
     }
     lerImagemGray(imagem);
