@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "imagem.h"
 
 void printImagem(Imagem *img){
@@ -108,51 +109,49 @@ void converteImagem(Imagem *image,FILE *arq){
     }
 }
 
-// float euclidesgray(Pixelgray p1, Pixelgray p2){
-//     return abs(p1.gray - p2.gray);
-// }
+float euclidesgray(Pixelgray p1, Pixelgray p2){
+    return pow(p1.gray - p2.gray,2);
+}
 
-void clusterizacao(Imagem *img){
-    ImageGray imagemCluster;
-    PixelGray valor, cinza;
-
-    FILE *seeds = fopen("seeds.txt", "r");
-    if(seeds == NULL){
-        printf("Failed to open seeds file.\n");
-        return;
-    }
-
-    imagemCluster.altura = img->altura;
-    imagemCluster.largura = img->largura;
-    imagemCluster.pixels = (PixelGray*)calloc(sizeof(PixelGray), imagemCluster.altura * imagemCluster.largura);
+void clusterizacao(ImageGray *img){
+    ImageGray imagecluster;
+    FILE *arq;
     
-    int i, j, gray;
+    imagecluster.pixels = (Pixelgray*)calloc(sizeof(Pixelgray), img->altura * img->largura);  
+    int x,y,z,num;
 
-    while(!feof(seeds)){
-        int x, y, num, res;
-        while(fscanf(seeds, "%d %d %d", &x, &y, &num) == 3){
-            cinza.gray = (img->pixels[x * img->largura + y].red + img->pixels[x * img->largura + y].green + img->pixels[x * img->largura + y].blue) / 3;
-            for(i = 0; i < img->altura; i++){
-                for(j = 0; j < img->largura; j++){
-                    valor.gray = (img->pixels[i * img->largura + j].red + img->pixels[i * img->largura + j].green + img->pixels[i * img->largura + j].blue) / 3;
-                    res = valor.gray - cinza.gray;
+    arq = fopen("../seed.txt","r");
 
-                    if(res < 0)
-                        res *= -1;
-                    
-                    if(res <= num){
-                        gray = (img->pixels[i * img->largura + j].red + img->pixels[i * img->largura + j].green + img->pixels[i * img->largura + j].blue) / 3;
-                        imagemCluster.pixels[i * img->largura + j].gray = gray;
-                    }
+    while(fscanf(arq,"%d %d %d %d", &x,&y,&z,&num) != EOF){
+
+        for(int i=0;i < img->altura; i++)
+            for(int j=0;j < img->largura; j++){
+                int result = euclidesgray(img->pixels[(i * img->largura) + j],img->pixels[(x * img->largura) + y]);
+
+                if(result < z){
+                    imagecluster.pixels[(i * img->largura) + j].gray = num;
                 }
+
             }
-        }
     }
-    FILE *imagem;
-    imagem = fopen("./imagemClusterizada.txt", "w");
-    ImagemGray(&imagemCluster,imagem);
-    fclose(imagem);
-    fclose(seeds);
+
+    arq = fopen("./imagemclusterizada.txt", "w");
+    for(int i=0;i<img->altura;i++){
+            for(int j=0;j<img->largura;j++)
+                fprintf(arq,"%d", imagecluster.pixels[(i * img->largura) + j].gray);
+        fprintf(arq,"\n");
+    }
+
+    free(imagecluster.pixels);
+
+}
+
+void lerImagemGray(FILE *arq){
+    char c;
+    while(fscanf(arq, "%c", &c) != EOF){
+        printf("%c", c);
+    }
+
 }
 
 int main(){
@@ -165,9 +164,10 @@ int main(){
     system("PAUSE");
 
     converteImagem(&image,arq);
-    printImagem(&image);
+    // printImagem(&image);
 
     tranformaRGB_GRAY(&image, &imagegray);
+    clusterizacao(&imagegray);
 
     FILE *imagem;
     imagem = fopen("./imagemgray.txt", "w");
@@ -175,13 +175,20 @@ int main(){
 
     imagem = fopen("./imagemgray.txt", "r");
     converteImagem(&image,imagem);
+    // printImagem(&image);
 
-    printImagem(&image);
+    imagem = fopen("./imagemClusterizada.txt", "r");
+    lerImagemGray(imagem);
 
-    clusterizacao(&image);
+    if(!imagem){
+        printf("Nao abri");
+        exit(1);
+    }
 
     free(image.pixels);
     free(imagegray.pixels);
+
+    fclose(imagem);
 
     return 0;
 }
