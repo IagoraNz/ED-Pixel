@@ -94,7 +94,7 @@ void alocarPixels(int altura, int largura, PixelRGB **pixel){
 }
 
 void converteImagem(Imagem *image,FILE *arq){
-    int i=0;
+    int i = 0;
 
     fscanf(arq,"%d", &(image->altura));
     fscanf(arq,"%d", &(image->largura));
