@@ -136,12 +136,6 @@ void clusterizacao(ImageGray *img){
             }
     }
 
-    // for(int i=0;i< imagecluster.altura;i++){
-    //     for(int j=0;j< imagecluster.largura;j++)
-    //         printf("%d%d", imagecluster.pixels[(i * imagecluster.largura)+ j].gray, imagecluster.pixels[(i * imagecluster.largura)+ j].gray);
-    //     printf("\n");
-    // }
-
     arq = fopen("./imagemclusterizada.txt", "w");
     for(int i=0;i < img->altura; i++){
         for(int j=0;j < img->largura;j++)
@@ -150,7 +144,6 @@ void clusterizacao(ImageGray *img){
     }
 
     free(imagecluster.pixels);
-
 }
 
 void lerImagemGray(FILE *arq){
