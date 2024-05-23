@@ -1,20 +1,27 @@
-# 📄 Processamento de imagem RGB, na escala de cinza e clusterização
-Repositório colaborativo para avanço e aprendizado da linguagem programação C em Estrutura de Dados I.
-Ao processamento do algoritmo serão obtidos imagens sob três parâmetro: RGB pós-análise dos pixels em seus espectros,
-conversão dessa imagem para cinza e clusterização dessa imagem
+# 📄 RGB, grayscale and clustering image processing
+Collaborative repository for advancing and learning the C programming language in Data Structure I.
+When processing the algorithm, images will be obtained under three parameters: RGB post-analysis of the pixels in their spectra,
+converting this image to gray and clustering this image
 
-## :link: Ambiente de desenvolvimento
-1. E o Visual Studio Code
+## :link: Development environment
+1. Regarding GCC
+```
+gcc.exe (tdm64-1) 10.3.0
+Copyright (C) 2020 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+2. Visual Studio Code
 ```
 1.89.1
 ```
 
-## :link: Resultados
-### Imagem 1
-Na imagem 1, obtém-se uma imagem colorida a partir da síntese dos dados fornecidos no arquivo txt. O processo funciona da seguinte maneira: cada conjunto de 3 valores numéricos lidos do arquivo representa um pixel individual na imagem. Esses três valores correspondem às intensidades das cores primárias – vermelho, verde e azul (RGB) – que, combinadas, determinam a cor final de cada pixel. Assim, ao ler e processar sequencialmente todos os valores do arquivo txt, constrói-se uma imagem completa, onde cada pixel é definido por suas respectivas componentes de cor.
+## :link: Results
+### Image 1
+In image 1, a colored image is obtained from the synthesis of the data provided in the txt file. The process works as follows: each set of 3 numerical values ​​read from the file represents an individual pixel in the image. These three values ​​correspond to the intensities of the primary colors – red, green and blue (RGB) – which, combined, determine the final color of each pixel. Thus, by sequentially reading and processing all the values ​​in the txt file, a complete image is constructed, where each pixel is defined by its respective color components.
 
-### Imagem 2
-Na imagem 2, observa-se a conversão da imagem 1 para o espectro em tons de cinza. Este processo envolve a transformação de cada pixel colorido da imagem original em uma escala de cinza, onde cada pixel é representado por um único valor de luminosidade. A conversão é realizada calculando-se a média ponderada das intensidades de vermelho, verde e azul (RGB) de cada pixel, resultando em uma imagem que varia do preto ao branco, passando por várias tonalidades de cinza.
+### Image 2
+In image 2, the conversion of image 1 to the grayscale spectrum is observed. This process involves transforming each colored pixel of the original image into a gray scale, where each pixel is represented by a single luminosity value. The conversion is carried out by calculating the weighted average of the red, green and blue (RGB) intensities of each pixel, resulting in an image that varies from black to white, through various shades of gray.
 
-### Imagem 3
-Na imagem 3, apresenta-se o resultado da aplicação do processo de clusterização na imagem 2. Esse processo envolve a segmentação da imagem em diferentes grupos ou clusters, onde pixels com características semelhantes são agrupados. A clusterização é realizada com base nas intensidades de cinza de cada pixel na imagem 2, destacando diferentes regiões e padrões na imagem resultante. O objetivo desse procedimento é identificar e separar áreas distintas dentro da imagem, facilitando a análise e interpretação dos dados visuais.
+### Image 3
+In image 3, the result of applying the clustering process to image 2 is presented. This process involves segmenting the image into different groups or clusters, where pixels with similar characteristics are grouped together. Clustering is performed based on the gray intensities of each pixel in image 2, highlighting different regions and patterns in the resulting image. The objective of this procedure is to identify and separate distinct areas within the image, facilitating the analysis and interpretation of visual data.
